@@ -16,7 +16,7 @@
       "relationship": true
     },
     "database": "MariaDB",
-    "databaseName": "",
+    "databaseName": "SINDICATOS",
     "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
@@ -37,7 +37,7 @@
   "table": {
     "tables": [
       {
-        "name": "SINDICATO",
+        "name": "Sindicato",
         "comment": "",
         "columns": [
           {
@@ -137,14 +137,14 @@
           "active": false,
           "left": 422,
           "top": 149,
-          "zIndex": 338,
-          "widthName": 70,
+          "zIndex": 401,
+          "widthName": 60,
           "widthComment": 60
         },
         "id": "e8fb367b-6894-367a-9977-664ca2d1c02e"
       },
       {
-        "name": "AFILIADOS",
+        "name": "Afiliados",
         "comment": "",
         "columns": [
           {
@@ -356,17 +356,17 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 1061,
           "top": 122,
-          "zIndex": 388,
-          "widthName": 68,
+          "zIndex": 413,
+          "widthName": 60,
           "widthComment": 60
         },
         "id": "cf4ef30a-53a4-80b2-149a-0c27cb876324"
       },
       {
-        "name": "ACTIVIDADES",
+        "name": "Actividades",
         "comment": "",
         "columns": [
           {
@@ -466,14 +466,14 @@
           "active": false,
           "left": 830,
           "top": 555,
-          "zIndex": 397,
-          "widthName": 84,
+          "zIndex": 408,
+          "widthName": 68,
           "widthComment": 60
         },
         "id": "90c42b1d-fb9b-c63f-3096-78efed8d0f9e"
       },
       {
-        "name": "ACTIVIDADES_FORMACION",
+        "name": "Actividades_Formacion",
         "comment": "",
         "columns": [
           {
@@ -619,14 +619,14 @@
           "active": false,
           "left": 277,
           "top": 356,
-          "zIndex": 399,
-          "widthName": 167,
+          "zIndex": 403,
+          "widthName": 137,
           "widthComment": 60
         },
         "id": "08c9c304-9e19-2c2f-4fa3-7625e5bacf02"
       },
       {
-        "name": "ACTIVIDADES_CHARLAS",
+        "name": "Actividades_Charlas",
         "comment": "",
         "columns": [
           {
@@ -749,14 +749,14 @@
           "active": false,
           "left": 285,
           "top": 750,
-          "zIndex": 362,
-          "widthName": 146,
+          "zIndex": 406,
+          "widthName": 121,
           "widthComment": 60
         },
         "id": "3f666450-7651-5e21-89cb-49da1ba2536e"
       },
       {
-        "name": "AFILIADO_ACTIVIDAD",
+        "name": "Afiliado_Actividad",
         "comment": "",
         "columns": [
           {
@@ -810,8 +810,8 @@
           "active": false,
           "left": 1326,
           "top": 456,
-          "zIndex": 396,
-          "widthName": 134,
+          "zIndex": 410,
+          "widthName": 105,
           "widthComment": 60
         },
         "id": "212e891f-4bd3-ca0d-a794-d216e72a3e2b"

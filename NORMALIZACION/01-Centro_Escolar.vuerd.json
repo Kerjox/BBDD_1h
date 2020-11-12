@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 4,
-    "scrollLeft": 3,
+    "scrollTop": 0,
+    "scrollLeft": 24,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -16,7 +16,7 @@
       "relationship": true
     },
     "database": "MySQL",
-    "databaseName": "",
+    "databaseName": "CNTRO_ESCOLAR",
     "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
@@ -37,7 +37,7 @@
   "table": {
     "tables": [
       {
-        "name": "ALUMNOS",
+        "name": "Alumnos",
         "comment": "",
         "columns": [
           {
@@ -157,17 +157,17 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 121,
           "top": 391,
-          "zIndex": 246,
-          "widthName": 65,
+          "zIndex": 263,
+          "widthName": 60,
           "widthComment": 60
         },
         "id": "db3f6f58-c59a-8b28-ff44-0e50ce122230"
       },
       {
-        "name": "CURSOS",
+        "name": "Cursos",
         "comment": "",
         "columns": [
           {
@@ -267,14 +267,14 @@
           "active": false,
           "left": 843,
           "top": 430,
-          "zIndex": 187,
+          "zIndex": 265,
           "widthName": 60,
           "widthComment": 60
         },
         "id": "8f7985fc-5388-58a6-44ab-917b208ffadb"
       },
       {
-        "name": "SECCIONES",
+        "name": "Secciones",
         "comment": "",
         "columns": [
           {
@@ -325,17 +325,17 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 852,
-          "top": 85,
-          "zIndex": 242,
-          "widthName": 71,
+          "active": true,
+          "left": 865,
+          "top": 82,
+          "zIndex": 267,
+          "widthName": 62,
           "widthComment": 60
         },
         "id": "f36697d6-abe7-6c35-8c11-1e73cca76378"
       },
       {
-        "name": "EXPEDIENTES",
+        "name": "Expedientes",
         "comment": "",
         "columns": [
           {
@@ -370,7 +370,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -393,7 +393,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -462,7 +462,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -481,8 +481,8 @@
           "active": false,
           "left": 125,
           "top": 56,
-          "zIndex": 240,
-          "widthName": 85,
+          "zIndex": 261,
+          "widthName": 74,
           "widthComment": 60
         },
         "id": "795f5049-9655-d294-fe0b-536a83586058"
@@ -525,8 +525,8 @@
           "columnIds": [
             "d15e0db0-47e8-fc3b-aa67-cc1ad9b49a82"
           ],
-          "x": 1051.5,
-          "y": 195,
+          "x": 1064.5,
+          "y": 192,
           "direction": "bottom"
         },
         "end": {

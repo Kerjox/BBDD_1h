@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 33,
-    "scrollLeft": 3,
+    "scrollTop": 0,
+    "scrollLeft": 438,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -16,7 +16,7 @@
       "relationship": true
     },
     "database": "MySQL",
-    "databaseName": "",
+    "databaseName": "RED-SUPERMERCADOS",
     "canvasType": "ERD",
     "language": "GraphQL",
     "tableCase": "pascalCase",
@@ -37,7 +37,7 @@
   "table": {
     "tables": [
       {
-        "name": "SUPERMERCADOS",
+        "name": "Supermercados",
         "comment": "",
         "columns": [
           {
@@ -183,14 +183,14 @@
           "active": false,
           "left": 752,
           "top": 234,
-          "zIndex": 363,
-          "widthName": 112,
+          "zIndex": 380,
+          "widthName": 94,
           "widthComment": 60
         },
         "id": "d9a8675e-ea2f-abc5-e34d-a207e8e49f2a"
       },
       {
-        "name": "EMPLEADOS",
+        "name": "Empleados",
         "comment": "",
         "columns": [
           {
@@ -474,14 +474,14 @@
           "active": false,
           "left": 657,
           "top": 667,
-          "zIndex": 351,
-          "widthName": 78,
+          "zIndex": 378,
+          "widthName": 67,
           "widthComment": 60
         },
         "id": "415f3495-7cb3-589d-8a6a-fb13d68fce22"
       },
       {
-        "name": "SECCIONES",
+        "name": "Secciones",
         "comment": "",
         "columns": [
           {
@@ -558,14 +558,14 @@
           "active": false,
           "left": 1384,
           "top": 668,
-          "zIndex": 352,
-          "widthName": 71,
+          "zIndex": 382,
+          "widthName": 62,
           "widthComment": 60
         },
         "id": "bba6b90d-9992-08c3-0121-ee8730bfb472"
       },
       {
-        "name": "PROVEEDORES",
+        "name": "Proveedores",
         "comment": "",
         "columns": [
           {
@@ -685,17 +685,17 @@
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 1388,
           "top": 165,
-          "zIndex": 349,
-          "widthName": 92,
+          "zIndex": 386,
+          "widthName": 76,
           "widthComment": 60
         },
         "id": "fbe594bc-b39e-60ac-568e-7524b355ef06"
       },
       {
-        "name": "PROVEEDORES-SECCION",
+        "name": "Proveedores-Seccion",
         "comment": "",
         "columns": [
           {
@@ -749,14 +749,14 @@
           "active": false,
           "left": 1388,
           "top": 432,
-          "zIndex": 347,
-          "widthName": 152,
+          "zIndex": 384,
+          "widthName": 126,
           "widthComment": 60
         },
         "id": "43c89f27-d5d9-db04-87a6-a56eca2f24dd"
       },
       {
-        "name": "CLIENTES",
+        "name": "Clientes",
         "comment": "",
         "columns": [
           {
@@ -948,14 +948,14 @@
           "active": false,
           "left": 58,
           "top": 141,
-          "zIndex": 361,
+          "zIndex": 374,
           "widthName": 60,
           "widthComment": 60
         },
         "id": "808de6d6-9c61-8905-4450-ab7e3254fbda"
       },
       {
-        "name": "CLIENTES_SUPERMERCADOS",
+        "name": "Clientes_Supermercados",
         "comment": "",
         "columns": [
           {
@@ -1006,11 +1006,11 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 233,
           "top": 522,
-          "zIndex": 372,
-          "widthName": 176,
+          "zIndex": 376,
+          "widthName": 148,
           "widthComment": 60
         },
         "id": "34053d5c-f8c0-881c-440e-49a3f745a2b6"
