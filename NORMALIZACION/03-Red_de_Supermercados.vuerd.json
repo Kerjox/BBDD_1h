@@ -3,7 +3,7 @@
     "width": 2000,
     "height": 2000,
     "scrollTop": 0,
-    "scrollLeft": 438,
+    "scrollLeft": 0,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -685,7 +685,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 1388,
           "top": 165,
           "zIndex": 386,
@@ -1044,7 +1044,7 @@
           "direction": "right"
         },
         "id": "3a9531c1-313a-8f36-98ec-2cfa86399e00",
-        "relationshipType": "ZeroN"
+        "relationshipType": "OneN"
       },
       {
         "identification": false,
@@ -1113,7 +1113,7 @@
           "direction": "top"
         },
         "id": "14eb6a4c-3068-fbeb-f158-32bbde8e39d8",
-        "relationshipType": "ZeroN"
+        "relationshipType": "OneN"
       },
       {
         "identification": false,

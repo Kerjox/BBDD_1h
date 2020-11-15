@@ -3,7 +3,7 @@
     "width": 2000,
     "height": 2000,
     "scrollTop": 0,
-    "scrollLeft": 0,
+    "scrollLeft": 340,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -206,7 +206,7 @@
           "active": false,
           "left": 384,
           "top": 94,
-          "zIndex": 256,
+          "zIndex": 272,
           "widthName": 60,
           "widthComment": 60
         },
@@ -492,6 +492,29 @@
             "id": "80decd3d-05fd-ceb2-f4ea-edc35dfa1244"
           },
           {
+            "name": "id_Ejemplar",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 71,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "13c8eaf6-b22c-29ff-249c-91f93c2ef0e6"
+          },
+          {
             "name": "precio",
             "comment": "",
             "dataType": "",
@@ -542,16 +565,39 @@
           "active": false,
           "left": 1061,
           "top": 47,
-          "zIndex": 268,
+          "zIndex": 271,
           "widthName": 145,
           "widthComment": 60
         },
         "id": "0b52ae5c-b0f3-f695-61d1-abed0294dd49"
       },
       {
-        "name": "Ejemplar_A_Oobservar",
+        "name": "Ejemplar_A_Observar",
         "comment": "",
         "columns": [
+          {
+            "name": "id_Ejemplar",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 71,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "2088a87c-e7ac-b931-7180-ab04c0c1eac2"
+          },
           {
             "name": "tiempo_Estudio",
             "comment": "",
@@ -600,11 +646,11 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 1081,
-          "top": 444,
-          "zIndex": 266,
-          "widthName": 137,
+          "active": true,
+          "left": 1054,
+          "top": 254,
+          "zIndex": 278,
+          "widthName": 130,
           "widthComment": 60
         },
         "id": "192f571d-b16b-6df1-ea4e-8600f0a92d30"
@@ -685,6 +731,52 @@
         },
         "id": "21ed123c-3737-c054-eb0b-ff95f265abc5",
         "relationshipType": "OneN"
+      },
+      {
+        "identification": false,
+        "start": {
+          "tableId": "45b93157-00b5-74ed-dd50-f393756572d8",
+          "columnIds": [
+            "fe0e2c85-165e-8dd4-fbe9-acdfd41a4db8"
+          ],
+          "x": 843,
+          "y": 147.125,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "0b52ae5c-b0f3-f695-61d1-abed0294dd49",
+          "columnIds": [
+            "13c8eaf6-b22c-29ff-249c-91f93c2ef0e6"
+          ],
+          "x": 1061,
+          "y": 122.5,
+          "direction": "left"
+        },
+        "id": "5f8e7708-b239-16c5-c78a-cdec9b92cf14",
+        "relationshipType": "ZeroOne"
+      },
+      {
+        "identification": false,
+        "start": {
+          "tableId": "45b93157-00b5-74ed-dd50-f393756572d8",
+          "columnIds": [
+            "fe0e2c85-165e-8dd4-fbe9-acdfd41a4db8"
+          ],
+          "x": 843,
+          "y": 253.375,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "192f571d-b16b-6df1-ea4e-8600f0a92d30",
+          "columnIds": [
+            "2088a87c-e7ac-b931-7180-ab04c0c1eac2"
+          ],
+          "x": 1054,
+          "y": 319.25,
+          "direction": "left"
+        },
+        "id": "db9dca0d-18f7-0753-f369-7e15508c2540",
+        "relationshipType": "ZeroOne"
       }
     ]
   }
