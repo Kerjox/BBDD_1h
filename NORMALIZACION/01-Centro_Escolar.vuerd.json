@@ -15,7 +15,7 @@
       "columnNotNull": true,
       "relationship": true
     },
-    "database": "MySQL",
+    "database": "MariaDB",
     "databaseName": "CNTRO_ESCOLAR",
     "canvasType": "ERD",
     "language": "GraphQL",
