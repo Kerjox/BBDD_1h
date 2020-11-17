@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 0,
-    "scrollLeft": 193,
+    "scrollTop": 14,
+    "scrollLeft": 315,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -670,9 +670,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 14,
-          "top": 862,
-          "zIndex": 567,
+          "left": 20,
+          "top": 860,
+          "zIndex": 570,
           "widthName": 130,
           "widthComment": 60
         },
@@ -1192,8 +1192,8 @@
           "columnIds": [
             "2088a87c-e7ac-b931-7180-ab04c0c1eac2"
           ],
-          "x": 445,
-          "y": 927.25,
+          "x": 451,
+          "y": 925.25,
           "direction": "right"
         },
         "id": "db9dca0d-18f7-0753-f369-7e15508c2540",
