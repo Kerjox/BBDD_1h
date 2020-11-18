@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 60,
-    "scrollLeft": 438,
+    "scrollTop": 368.75,
+    "scrollLeft": 411.8055419921875,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -15,9 +15,9 @@
       "columnNotNull": true,
       "relationship": true
     },
-    "database": "MySQL",
+    "database": "MariaDB",
     "databaseName": "RED-SUPERMERCADOS",
-    "canvasType": "ERD",
+    "canvasType": "SQL",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",
@@ -225,7 +225,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -248,7 +248,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -260,7 +260,7 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "4795f663-e15a-b5a9-0bef-44210ee0b9b4"
+            "id": "047e7f7d-bc4a-febf-1b37-e8445a9763f9"
           },
           {
             "name": "id_Jefe",
@@ -271,7 +271,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -340,7 +340,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -363,7 +363,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -386,7 +386,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -409,7 +409,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": true
+              "notNull": false
             },
             "ui": {
               "active": false,
@@ -471,10 +471,10 @@
           }
         ],
         "ui": {
-          "active": false,
-          "left": 795,
-          "top": 497,
-          "zIndex": 387,
+          "active": true,
+          "left": 800.9999999999999,
+          "top": 522,
+          "zIndex": 496,
           "widthName": 67,
           "widthComment": 60
         },
@@ -558,7 +558,7 @@
           "active": false,
           "left": 1384,
           "top": 668,
-          "zIndex": 382,
+          "zIndex": 441,
           "widthName": 62,
           "widthComment": 60
         },
@@ -695,7 +695,7 @@
         "id": "fbe594bc-b39e-60ac-568e-7524b355ef06"
       },
       {
-        "name": "Proveedores-Seccion",
+        "name": "Proveedores-Secciones",
         "comment": "",
         "columns": [
           {
@@ -746,11 +746,11 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 1388,
           "top": 432,
-          "zIndex": 394,
-          "widthName": 126,
+          "zIndex": 472,
+          "widthName": 140,
           "widthComment": 60
         },
         "id": "43c89f27-d5d9-db04-87a6-a56eca2f24dd"
@@ -1026,29 +1026,6 @@
       {
         "identification": false,
         "start": {
-          "tableId": "bba6b90d-9992-08c3-0121-ee8730bfb472",
-          "columnIds": [
-            "b7b5cdd3-7a3b-443a-381b-b6eacd5d9fa2"
-          ],
-          "x": 1384,
-          "y": 733.25,
-          "direction": "left"
-        },
-        "end": {
-          "tableId": "415f3495-7cb3-589d-8a6a-fb13d68fce22",
-          "columnIds": [
-            "4795f663-e15a-b5a9-0bef-44210ee0b9b4"
-          ],
-          "x": 1242,
-          "y": 733.25,
-          "direction": "right"
-        },
-        "id": "3a9531c1-313a-8f36-98ec-2cfa86399e00",
-        "relationshipType": "OneN"
-      },
-      {
-        "identification": false,
-        "start": {
           "tableId": "d9a8675e-ea2f-abc5-e34d-a207e8e49f2a",
           "columnIds": [
             "8fa9c24f-24d0-3761-a0e0-65723d9e59fc"
@@ -1062,8 +1039,8 @@
           "columnIds": [
             "1ac624c5-6d01-5495-6f38-56353ca13fe3"
           ],
-          "x": 795,
-          "y": 654.5,
+          "x": 800.9999999999999,
+          "y": 679.5,
           "direction": "left"
         },
         "id": "7a3bd629-135b-833c-258e-f6b3dcfce91b",
@@ -1076,8 +1053,8 @@
           "columnIds": [
             "5080d1ca-c37b-b4a9-dd08-71f66c84460b"
           ],
-          "x": 1222,
-          "y": 497,
+          "x": 1228,
+          "y": 522,
           "direction": "top"
         },
         "end": {
@@ -1085,8 +1062,8 @@
           "columnIds": [
             "edf58920-047a-8f8b-0f06-e87f94e399eb"
           ],
-          "x": 1242,
-          "y": 575.75,
+          "x": 1248,
+          "y": 600.75,
           "direction": "right"
         },
         "id": "afe8c0a8-ccc8-648b-9951-03608250ec80",
@@ -1182,6 +1159,29 @@
           "direction": "bottom"
         },
         "id": "2bbcbc13-9b96-55da-9543-19a1d21d1fa7",
+        "relationshipType": "OneN"
+      },
+      {
+        "identification": false,
+        "start": {
+          "tableId": "bba6b90d-9992-08c3-0121-ee8730bfb472",
+          "columnIds": [
+            "b7b5cdd3-7a3b-443a-381b-b6eacd5d9fa2"
+          ],
+          "x": 1384,
+          "y": 733.25,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "415f3495-7cb3-589d-8a6a-fb13d68fce22",
+          "columnIds": [
+            "047e7f7d-bc4a-febf-1b37-e8445a9763f9"
+          ],
+          "x": 1248,
+          "y": 758.25,
+          "direction": "right"
+        },
+        "id": "0e454f4e-8e3b-47be-6ce7-1771ad2c9641",
         "relationshipType": "OneN"
       }
     ]

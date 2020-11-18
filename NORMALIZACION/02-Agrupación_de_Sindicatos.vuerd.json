@@ -3,7 +3,7 @@
     "width": 2000,
     "height": 2000,
     "scrollTop": 29,
-    "scrollLeft": 239,
+    "scrollLeft": 240,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -134,7 +134,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 422,
           "top": 149,
           "zIndex": 428,
@@ -799,7 +799,7 @@
           "direction": "left"
         },
         "id": "d123f404-649f-5ccc-781e-a2b404addb8a",
-        "relationshipType": "One"
+        "relationshipType": "OneN"
       },
       {
         "identification": true,
