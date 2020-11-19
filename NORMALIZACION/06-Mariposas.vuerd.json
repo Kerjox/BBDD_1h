@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 14,
-    "scrollLeft": 315,
+    "scrollTop": 381.6666564941406,
+    "scrollLeft": 0,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -252,7 +252,7 @@
           "active": false,
           "left": 548,
           "top": 602,
-          "zIndex": 569,
+          "zIndex": 573,
           "widthName": 60,
           "widthComment": 60
         },
@@ -924,11 +924,11 @@
         "id": "c78b4b29-8499-571b-c605-405b3c811dff"
       },
       {
-        "name": "Collecion",
+        "name": "Coleccion",
         "comment": "",
         "columns": [
           {
-            "name": "id_Collecion",
+            "name": "id_Coleccion",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -943,7 +943,7 @@
               "pk": true,
               "fk": false,
               "pfk": false,
-              "widthName": 73,
+              "widthName": 78,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -1070,7 +1070,7 @@
           "active": false,
           "left": 1082,
           "top": 389,
-          "zIndex": 565,
+          "zIndex": 579,
           "widthName": 60,
           "widthComment": 60
         },
