@@ -2,7 +2,7 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 447.9166564941406,
+    "scrollTop": 447.4999694824219,
     "scrollLeft": 0,
     "show": {
       "tableComment": true,
@@ -17,7 +17,7 @@
     },
     "database": "MySQL",
     "databaseName": "DIETAS_GANADERAS",
-    "canvasType": "ERD",
+    "canvasType": "SQL",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",

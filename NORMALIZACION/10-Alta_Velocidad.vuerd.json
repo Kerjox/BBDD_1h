@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 18.05555534362793,
-    "scrollLeft": 38.19444274902344,
+    "scrollTop": 0,
+    "scrollLeft": 99.16666412353516,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -114,7 +114,7 @@
           "active": false,
           "left": 46,
           "top": 106,
-          "zIndex": 180,
+          "zIndex": 397,
           "widthName": 66,
           "widthComment": 60
         },
@@ -263,7 +263,7 @@
             "id": "9eed7679-7462-76dc-35c3-0b24747009ba"
           },
           {
-            "name": "id_Estacion_Entrada",
+            "name": "id_Estacion_Llegada",
             "comment": "",
             "dataType": "INT",
             "default": "",
@@ -278,7 +278,7 @@
               "pk": false,
               "fk": true,
               "pfk": false,
-              "widthName": 122,
+              "widthName": 124,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -290,7 +290,7 @@
           "active": false,
           "left": 662.0555617919673,
           "top": 76.55555732161899,
-          "zIndex": 392,
+          "zIndex": 396,
           "widthName": 60,
           "widthComment": 60
         },
@@ -301,50 +301,50 @@
         "comment": "",
         "columns": [
           {
-            "name": "id_Parada",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": true,
-              "primaryKey": true,
-              "unique": true,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 61,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "a727a6ea-7f4e-a3ba-a2e3-f96ca15e7b64"
-          },
-          {
             "name": "id_Trayecto",
             "comment": "",
             "dataType": "INT",
             "default": "",
             "option": {
               "autoIncrement": false,
-              "primaryKey": false,
+              "primaryKey": true,
               "unique": false,
               "notNull": true
             },
             "ui": {
               "active": false,
               "pk": false,
-              "fk": true,
-              "pfk": false,
+              "fk": false,
+              "pfk": true,
               "widthName": 69,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
             },
             "id": "e8c1d144-778f-319f-23c5-c65082942162"
+          },
+          {
+            "name": "id_Estacion",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": true,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": true,
+              "widthName": 69,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "86f13d50-89fe-bf49-405b-86c655f99d78"
           },
           {
             "name": "hora_Legada",
@@ -391,36 +391,13 @@
               "widthDefault": 60
             },
             "id": "24bf3868-be26-ec34-b6c0-ee21f76ac0fe"
-          },
-          {
-            "name": "id_Estacion",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": true,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 69,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "86f13d50-89fe-bf49-405b-86c655f99d78"
           }
         ],
         "ui": {
           "active": false,
           "left": 43.69447521258095,
           "top": 323.7777826344521,
-          "zIndex": 353,
+          "zIndex": 409,
           "widthName": 60,
           "widthComment": 60
         },
@@ -877,9 +854,9 @@
         ],
         "ui": {
           "active": true,
-          "left": 634.027784621274,
-          "top": 388.19443299483453,
-          "zIndex": 393,
+          "left": 634.8611179214936,
+          "top": 384.861099793956,
+          "zIndex": 410,
           "widthName": 76,
           "widthComment": 60
         },
@@ -894,7 +871,7 @@
   "relationship": {
     "relationships": [
       {
-        "identification": false,
+        "identification": true,
         "start": {
           "tableId": "9ff50bba-da39-d3e6-1c14-4f1b60cb0d2b",
           "columnIds": [
@@ -910,7 +887,7 @@
             "e8c1d144-778f-319f-23c5-c65082942162"
           ],
           "x": 456.6944752125809,
-          "y": 409.5277826344521,
+          "y": 399.2777826344521,
           "direction": "right"
         },
         "id": "6f18a13e-df68-9bf2-b8e0-487be37e0918",
@@ -937,7 +914,7 @@
           "direction": "left"
         },
         "id": "49ed78c6-3c01-c2bd-90c1-226b276788af",
-        "relationshipType": "ZeroN"
+        "relationshipType": "OneN"
       },
       {
         "identification": false,
@@ -960,10 +937,10 @@
           "direction": "left"
         },
         "id": "89d30b27-6369-a160-e7e1-e5ae52ca04c3",
-        "relationshipType": "ZeroN"
+        "relationshipType": "OneN"
       },
       {
-        "identification": false,
+        "identification": true,
         "start": {
           "tableId": "170b37b6-a12d-f450-4cea-00de59de666d",
           "columnIds": [
@@ -983,7 +960,7 @@
           "direction": "top"
         },
         "id": "aa1694d1-a218-ad7b-18e5-14bde9bda9e6",
-        "relationshipType": "ZeroN"
+        "relationshipType": "OneN"
       },
       {
         "identification": false,
@@ -992,7 +969,7 @@
           "columnIds": [
             "207436c9-e7ba-eba7-7d8b-b8f871ffabfc"
           ],
-          "x": 1118.0555617919672,
+          "x": 1120.0555617919672,
           "y": 182.805557321619,
           "direction": "right"
         },
@@ -1038,8 +1015,8 @@
           "columnIds": [
             "57116516-792a-0df0-97ee-1a0e1abb7436"
           ],
-          "x": 889.527784621274,
-          "y": 388.19443299483453,
+          "x": 890.3611179214936,
+          "y": 384.861099793956,
           "direction": "top"
         },
         "end": {
@@ -1047,7 +1024,7 @@
           "columnIds": [
             "6eadada2-9cd9-9ec0-b26e-b5e3f62cf1e1"
           ],
-          "x": 890.0555617919673,
+          "x": 891.0555617919673,
           "y": 289.055557321619,
           "direction": "bottom"
         },

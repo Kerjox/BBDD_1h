@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 398.611083984375,
-    "scrollLeft": 164.5833282470703,
+    "scrollTop": 398.33331298828125,
+    "scrollLeft": 164.16665649414062,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -17,7 +17,7 @@
     },
     "database": "MySQL",
     "databaseName": "TOYOTA",
-    "canvasType": "ERD",
+    "canvasType": "SQL",
     "language": "GraphQL",
     "tableCase": "pascalCase",
     "columnCase": "camelCase",

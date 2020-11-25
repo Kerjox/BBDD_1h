@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 162,
-    "scrollLeft": 8,
+    "scrollTop": 61.666664123535156,
+    "scrollLeft": 84.16666412353516,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -1243,7 +1243,7 @@
           "direction": "top"
         },
         "id": "f87cce6f-da20-0e6c-e770-70bc695d6c8b",
-        "relationshipType": "OneN"
+        "relationshipType": "ZeroN"
       },
       {
         "identification": false,
