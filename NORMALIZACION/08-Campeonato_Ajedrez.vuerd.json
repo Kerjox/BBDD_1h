@@ -1312,7 +1312,7 @@
           "direction": "left"
         },
         "id": "5857aa90-f16f-a45e-b47f-51654d73ca93",
-        "relationshipType": "OneOnly"
+        "relationshipType": "OneN"
       }
     ]
   }
