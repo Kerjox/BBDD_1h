@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 20,
-    "scrollLeft": 145,
+    "scrollTop": 0,
+    "scrollLeft": 187.5,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -378,7 +378,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -401,7 +401,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -466,7 +466,7 @@
           "active": false,
           "left": 769,
           "top": 579,
-          "zIndex": 421,
+          "zIndex": 434,
           "widthName": 60,
           "widthComment": 60
         },
@@ -714,29 +714,6 @@
         "comment": "",
         "columns": [
           {
-            "name": "id_movimiento",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": true,
-              "primaryKey": true,
-              "unique": true,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 92,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "b72faf95-7d66-489c-5e71-e826682719ce"
-          },
-          {
             "name": "id_Partida",
             "comment": "",
             "dataType": "INT",
@@ -758,6 +735,29 @@
               "widthDefault": 60
             },
             "id": "270671c4-a4dd-383f-4e60-7a102e531f1c"
+          },
+          {
+            "name": "id_movimiento",
+            "comment": "",
+            "dataType": "INT",
+            "default": "",
+            "option": {
+              "autoIncrement": true,
+              "primaryKey": true,
+              "unique": true,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": true,
+              "fk": false,
+              "pfk": false,
+              "widthName": 92,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b72faf95-7d66-489c-5e71-e826682719ce"
           },
           {
             "name": "ficha_Desplazada",
@@ -856,7 +856,7 @@
           "active": false,
           "left": 207,
           "top": 737,
-          "zIndex": 425,
+          "zIndex": 426,
           "widthName": 60,
           "widthComment": 60
         },
