@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 9.166666030883789,
-    "scrollLeft": 448.33331298828125,
+    "scrollTop": 0,
+    "scrollLeft": 0,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -502,9 +502,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 122.50000382794286,
-          "top": 649.1666449440845,
-          "zIndex": 326,
+          "left": 91.66667171981602,
+          "top": 507.49998390674523,
+          "zIndex": 414,
           "widthName": 125,
           "widthComment": 60
         },
@@ -677,7 +677,7 @@
           }
         ],
         "ui": {
-          "active": true,
+          "active": false,
           "left": 688.3333146770804,
           "top": 323.33332455820545,
           "zIndex": 412,
@@ -687,7 +687,7 @@
         "id": "aad356d5-7088-5bbf-569e-f7d751bf42e2"
       },
       {
-        "name": "Monte_Provincia",
+        "name": "provincia_Monte",
         "comment": "",
         "columns": [
           {
@@ -764,7 +764,7 @@
           "active": false,
           "left": 102.5000046226711,
           "top": 343.3333237634771,
-          "zIndex": 259,
+          "zIndex": 418,
           "widthName": 103,
           "widthComment": 60
         },
@@ -859,7 +859,7 @@
             "id": "ad9f5c02-f960-c59c-71b4-ce235f50224a"
           },
           {
-            "name": "datacion",
+            "name": "periodo_Datacion",
             "comment": "",
             "dataType": "VARCHAR",
             "default": "",
@@ -874,7 +874,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 109,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -884,9 +884,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 963.3333030011942,
-          "top": 589.9999833371918,
-          "zIndex": 328,
+          "left": 1131.6666296455637,
+          "top": 644.9999811516886,
+          "zIndex": 416,
           "widthName": 124,
           "widthComment": 60
         },
@@ -1060,8 +1060,8 @@
           "columnIds": [
             "316061a4-3260-37cf-89b4-d1430a42b284"
           ],
-          "x": 599.5000038279429,
-          "y": 734.9166449440845,
+          "x": 568.666671719816,
+          "y": 593.2499839067452,
           "direction": "right"
         },
         "end": {
@@ -1161,8 +1161,8 @@
           "columnIds": [
             "ad9f5c02-f960-c59c-71b4-ce235f50224a"
           ],
-          "x": 963.3333030011942,
-          "y": 644.9999833371918,
+          "x": 1131.6666296455637,
+          "y": 699.9999811516886,
           "direction": "left"
         },
         "id": "fea1daea-94e3-39fe-eb1b-980349d9cfdf",
