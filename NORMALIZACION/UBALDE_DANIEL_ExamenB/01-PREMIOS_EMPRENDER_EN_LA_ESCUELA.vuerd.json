@@ -2,7 +2,7 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 133.3333282470703,
+    "scrollTop": 0,
     "scrollLeft": 0,
     "show": {
       "tableComment": true,
@@ -233,7 +233,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -298,7 +298,7 @@
           "active": false,
           "left": 59.16667226288031,
           "top": 313.3333248562288,
-          "zIndex": 499,
+          "zIndex": 552,
           "widthName": 82,
           "widthComment": 60
         },
@@ -340,7 +340,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -405,7 +405,7 @@
           "active": false,
           "left": 579.999976952871,
           "top": 311.66666024261093,
-          "zIndex": 487,
+          "zIndex": 544,
           "widthName": 134,
           "widthComment": 60
         },
@@ -447,7 +447,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -535,7 +535,7 @@
           "active": false,
           "left": 589.9999845027929,
           "top": 482.4999848008163,
-          "zIndex": 534,
+          "zIndex": 548,
           "widthName": 129,
           "widthComment": 60
         },
@@ -741,7 +741,7 @@
         "id": "8a6cea26-a6fd-a587-14c8-1ca741822b9d"
       },
       {
-        "name": "provincias",
+        "name": "Provincias",
         "comment": "",
         "columns": [
           {
@@ -795,14 +795,14 @@
           "active": false,
           "left": 650.8333154320725,
           "top": 776.6666397783497,
-          "zIndex": 396,
+          "zIndex": 540,
           "widthName": 64,
           "widthComment": 60
         },
         "id": "8b29f1ac-9dba-cb64-715f-a9166e3ea831"
       },
       {
-        "name": "proyecto",
+        "name": "Proyecto",
         "comment": "",
         "columns": [
           {
@@ -925,7 +925,7 @@
           "active": false,
           "left": 1120.8332967493295,
           "top": 385.8333220283199,
-          "zIndex": 535,
+          "zIndex": 538,
           "widthName": 60,
           "widthComment": 60
         },

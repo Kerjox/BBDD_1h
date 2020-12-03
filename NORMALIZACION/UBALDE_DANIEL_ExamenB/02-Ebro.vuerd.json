@@ -2,8 +2,8 @@
   "canvas": {
     "width": 2000,
     "height": 2000,
-    "scrollTop": 50.83333206176758,
-    "scrollLeft": 0,
+    "scrollTop": 79.16666412353516,
+    "scrollLeft": 181.66665649414062,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -546,7 +546,7 @@
               "autoIncrement": false,
               "primaryKey": false,
               "unique": false,
-              "notNull": false
+              "notNull": true
             },
             "ui": {
               "active": false,
@@ -680,7 +680,7 @@
           "active": false,
           "left": 688.3333146770804,
           "top": 322.4999912579858,
-          "zIndex": 446,
+          "zIndex": 450,
           "widthName": 60,
           "widthComment": 60
         },
