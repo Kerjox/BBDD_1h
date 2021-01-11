@@ -1,0 +1,4 @@
+SELECT p.*, g.NOMBREGENERO
+FROM peliculas AS p, generos AS g
+WHERE p.GENERO = g.CODIGOGENERO AND g.NOMBREGENERO IN ('Drama','Comedia')
+ORDER BY p.GENERO
