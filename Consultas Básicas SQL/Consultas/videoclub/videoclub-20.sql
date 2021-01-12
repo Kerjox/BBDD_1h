@@ -1,0 +1,4 @@
+SELECT p.TITULO, g.NOMBREGENERO
+FROM peliculas AS p, generos AS g
+WHERE p.GENERO = g.CODIGOGENERO AND g.NOMBREGENERO IN ('Terror', 'Comedia', 'Infantil')
+ORDER BY p.TITULO ASC

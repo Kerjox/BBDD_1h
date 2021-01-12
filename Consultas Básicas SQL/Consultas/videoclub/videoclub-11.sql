@@ -1,0 +1,3 @@
+SELECT TITULO
+FROM peliculas
+WHERE TITULO LIKE '%s'

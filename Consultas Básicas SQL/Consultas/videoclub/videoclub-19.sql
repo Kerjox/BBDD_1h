@@ -1,0 +1,3 @@
+SELECT TITULO
+FROM peliculas
+WHERE TITULO NOT LIKE '%a%'
