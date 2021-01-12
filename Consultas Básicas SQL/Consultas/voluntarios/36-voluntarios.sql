@@ -1,0 +1,2 @@
+SELECT nombre, Poblacion, CONCAT(SUBSTRING(nombre, 1, 2), SUBSTRING(Poblacion, -3, 3), Idvoluntario) AS 'Usuario', CONCAT(SUBSTRING(Cp, 3, 2), Idvoluntario, MONTH(FechaNacimiento)) AS 'Clave'
+FROM voluntarios_old
