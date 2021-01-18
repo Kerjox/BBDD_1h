@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  mariadb:
+    container_name: mariadb-gorka
+    image: mariadb:latest
+    #restart: always			# If you wont to start this container on startup docker
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./gorka-mariadb-volume:/var/lib/mysql
+    env_file:
+      - ./mariadb.env
