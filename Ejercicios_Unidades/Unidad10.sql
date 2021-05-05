@@ -155,3 +155,83 @@ WHERE MATCH(nombre, descripcion) AGAINST ('+tronco -árbol' IN BOOLEAN MODE);
 SELECT p.nombre, p.descripcion
 FROM producto p
 WHERE MATCH(nombre, descripcion) AGAINST ('"proviene de las costas"' IN BOOLEAN MODE);
+
+/*
+ 08. Crea un índice de tipo INDEX compuesto por las columnas apellido_contacto
+ y nombre_contacto de la tabla cliente.
+ */
+
+CREATE INDEX nombre_contacto_apellido
+	on cliente (nombre_contacto, apellido_contacto);
+
+/*
+ 09. Una vez creado el índice del ejercicio anterior realice las siguientes
+ consultas haciendo uso de EXPLAIN:
+ */
+
+/*
+ Busca el cliente Javier Villar. ¿Cuántas filas se han examinado hasta
+ encontrar el resultado?
+ */
+
+EXPLAIN SELECT c.nombre_cliente
+FROM cliente c
+WHERE c.nombre_cliente = 'Javier Villar';
+
+/*
+ Busca el ciente anterior utilizando solamente el apellido Villar.
+ ¿Cuántas filas se han examinado hasta encontrar el resultado?
+ */
+
+EXPLAIN SELECT c.nombre_cliente
+FROM cliente c
+WHERE c.nombre_cliente LIKE '%Villar';
+
+/*
+ Busca el ciente anterior utilizando solamente el nombre Javier.
+ ¿Cuántas filas se han examinado hasta encontrar el resultado?
+ ¿Qué ha ocurrido en este caso?
+ */
+
+EXPLAIN SELECT c.nombre_cliente
+FROM cliente c
+WHERE c.nombre_cliente LIKE 'Javier%';
+
+
+/*
+ 10. Calcula cuál podría ser un buen valor para crear un índice sobre
+ un prefijo de la columna nombre_cliente de la tabla cliente. Tenga en
+ cuenta que un buen valor será aquel que nos permita utilizar el menor
+ número de caracteres para diferenciar todos los valores que existen en
+ la columna sobre la que estamos creando el índice.
+ */
+
+create index cliente_nombre_cliente_index
+	on cliente (nombre_cliente);
+
+DROP INDEX cliente_nombre_cliente_index on cliente;
+
+/*
+ En primer lugar calculamos cuántos valores distintos existen en la
+ columna nombre_cliente. Necesitarás utilizar la función COUNT y DISTINCT.
+ */
+
+SELECT DISTINCT COUNT(c.nombre_cliente)
+FROM cliente c;
+
+/*
+ Haciendo uso de la función LEFT ve calculando el número de caracteres que
+ necesitas utilizar como prefijo para diferenciar todos los valores de la columna.
+ Necesitarás la función COUNT, DISTINCT y LEFT.
+ */
+SELECT COUNT(DISTINCT LEFT(c.nombre_cliente, 11))
+    FROM cliente c;
+
+/*
+ Una vez que hayas encontrado el valor adecuado para el prefijo, crea el índice
+ sobre la columna nombre_cliente de la tabla cliente.
+ */
+
+CREATE INDEX nombre_cliente
+    on cliente (nombre_cliente);
+
