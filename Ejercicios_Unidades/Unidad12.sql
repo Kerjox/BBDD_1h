@@ -1,3 +1,5 @@
+USE jardineria;
+
 /*
  01. Escribe un procedimiento que no tenga ningún parámetro de entrada
  ni de salida y que muestre el texto ¡Hola mundo!.
@@ -177,6 +179,7 @@ BEGIN
         WHEN 7 THEN SET v = 'Domingo';
     END CASE;
 end $$
+DELIMITER ;
 
 CALL diaSemana(5, @dia);
 SELECT @dia AS DiaSemana;
@@ -195,6 +198,7 @@ BEGIN
 
     SELECT c.nombre_cliente, c.pais FROM cliente c WHERE pais = country;
 END $$
+DELIMITER ;
 
 CALL SELECT_CLEINT_BY_COUNTRY('USA');
 
@@ -212,7 +216,8 @@ BEGIN
 
     SET max = (SELECT MAX(p.total) FROM pago p WHERE forma_pago = v);
 
-end $$
+END $$
+DELIMITER ;
 
 CALL MAX_PAYMENT('PayPal', @max);
 SELECT @max AS Pago_Maximo;
@@ -241,11 +246,54 @@ BEGIN
     SET sum = (SELECT SUM(p.total) FROM pago p WHERE forma_pago = v);
     SET cont = (SELECT COUNT(p.total) FROM pago p WHERE forma_pago = v);
 
-end $$
+END $$
+DELIMITER ;
 
 CALL INFO_PAYMENT('PayPal', @max, @min, @avg, @sum, @cont);
 SELECT @max AS Maximo, @min AS Minimo, @avg AS Promedio, @sum AS Suma, @cont AS NumeroTotal;
 
 /*
-
+04. Crea una base de datos llamada procedimientos que contenga una tabla llamada cuadrados.
+La tabla cuadrados debe tener dos columnas de tipo INT UNSIGNED, una columna llamada número
+y otra columna llamada cuadrado.
  */
+
+DROP DATABASE IF EXISTS procedimientos;
+CREATE DATABASE procedimientos;
+USE procedimientos;
+
+CREATE TABLE cuadrados (
+    numero INT UNSIGNED,
+    cuadrado INT UNSIGNED
+);
+
+/*
+ Una vez creada la base de datos y la tabla deberá crear un procedimiento llamado calcular_cuadrados
+ con las siguientes características. El procedimiento recibe un parámetro de entrada llamado tope de
+ tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el
+ valor introducido como parámetro. El valor del números y de sus cuadrados deberán ser almacenados en
+ la tabla cuadrados que hemos creado previamente.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_cuadrados;
+DELIMITER $$
+CREATE PROCEDURE calcular_cuadrados(IN tope INT UNSIGNED)
+BEGIN
+
+    DECLARE i INT UNSIGNED DEFAULT 0;
+    calc: LOOP
+
+        SET i = i + 1;
+        INSERT INTO cuadrados VALUES (i, POW(i, i));
+
+        IF i = tope THEN
+
+            LEAVE calc;
+        END IF ;
+    END LOOP calc;
+END $$
+DELIMITER ;
+
+DELETE FROM cuadrados;
+CALL calcular_cuadrados(5);
+SELECT * FROM cuadrados;
