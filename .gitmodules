@@ -1,3 +1,9 @@
 [submodule "colaTest"]
 	path = colaTest
 	url = https://github.com/Kerjox/colaTest.git
+[submodule "Rubrica_mongoDB"]
+	path = Rubrica_mongoDB
+	url = https://github.com/Kerjox/Rubrica_mongoDB.git
+[submodule "Rubrica_Casandra"]
+	path = Rubrica_Casandra
+	url = https://github.com/Kerjox/Rubrica_Casandra.git
