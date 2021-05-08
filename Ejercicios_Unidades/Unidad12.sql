@@ -273,6 +273,11 @@ CREATE TABLE cuadrados (
  tipo INT UNSIGNED y calculará el valor de los cuadrados de los primeros números naturales hasta el
  valor introducido como parámetro. El valor del números y de sus cuadrados deberán ser almacenados en
  la tabla cuadrados que hemos creado previamente.
+
+ Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de la tabla antes de insertar los
+ nuevos valores de los cuadrados que va a calcular.
+
+ Utilice un bucle WHILE para resolver el procedimiento.
  */
 
 DROP PROCEDURE IF EXISTS calcular_cuadrados;
@@ -280,20 +285,613 @@ DELIMITER $$
 CREATE PROCEDURE calcular_cuadrados(IN tope INT UNSIGNED)
 BEGIN
 
-    DECLARE i INT UNSIGNED DEFAULT 0;
-    calc: LOOP
+    DECLARE i INT UNSIGNED DEFAULT 1;
 
+    DELETE FROM cuadrados;
+
+    while1:WHILE i < tope DO
+
+        INSERT INTO cuadrados VALUES (i, POW(i, 2));
         SET i = i + 1;
-        INSERT INTO cuadrados VALUES (i, POW(i, i));
+
+    END WHILE while1;
+
+END $$
+DELIMITER ;
+
+
+CALL calcular_cuadrados(5);
+SELECT * FROM cuadrados;
+
+
+/*
+ 05. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_cuadrados;
+DELIMITER $$
+CREATE PROCEDURE calcular_cuadrados(IN tope INT UNSIGNED)
+BEGIN
+
+    DECLARE i INT UNSIGNED DEFAULT 1;
+
+    DELETE FROM cuadrados;
+
+    repeat1:REPEAT
+
+        INSERT INTO cuadrados VALUES (i, POW(i, 2));
+        SET i = i + 1;
+
+    UNTIL i + 1 > tope
+    END REPEAT repeat1;
+
+END $$
+DELIMITER ;
+
+
+CALL calcular_cuadrados(5);
+SELECT * FROM cuadrados;
+
+/*
+ 06. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_cuadrados;
+DELIMITER $$
+CREATE PROCEDURE calcular_cuadrados(IN tope INT UNSIGNED)
+BEGIN
+
+    DECLARE i INT UNSIGNED DEFAULT 1;
+
+    DELETE FROM cuadrados;
+
+    calc: LOOP
 
         IF i = tope THEN
 
             LEAVE calc;
         END IF ;
-    END LOOP calc;
+
+        INSERT INTO cuadrados VALUES (i, POW(i, 2));
+
+        SET i = i + 1;
+
+    END LOOP calc ;
 END $$
 DELIMITER ;
 
-DELETE FROM cuadrados;
+
 CALL calcular_cuadrados(5);
 SELECT * FROM cuadrados;
+
+/*
+ 07. Crea una base de datos llamada procedimientos que contenga una tabla llamada ejercicio.
+ La tabla debe tener una única columna llamada número y el tipo de dato de esta columna debe ser INT UNSIGNED.
+ */
+
+CREATE TABLE ejercicios (
+    numero INT UNSIGNED
+);
+
+/*
+ Una vez creada la base de datos y la tabla deberá crear un procedimiento llamado calcular_
+ números con las siguientes características. El procedimiento recibe un parámetro de entrada
+ llamado valor_inicial de tipo INT UNSIGNED y deberá almacenar en la tabla ejercicio toda la
+ secuencia de números desde el valor inicial pasado como entrada hasta el 1.
+
+ Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas antes
+ de insertar los nuevos valores.
+
+ Utilice un bucle WHILE para resolver el procedimiento.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_numeros;
+DELIMITER $$
+CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+BEGIN
+
+    DELETE FROM ejercicios;
+
+    while1:WHILE valor_inicial != 0 DO
+
+        INSERT INTO ejercicios VALUES (valor_inicial);
+        SET valor_inicial = valor_inicial - 1;
+    END WHILE ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_numeros(6);
+SELECT * FROM ejercicios;
+
+/*
+ 08. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_numeros;
+DELIMITER $$
+CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+BEGIN
+
+    DELETE FROM ejercicios;
+
+    repeat1:REPEAT
+
+        INSERT INTO ejercicios VALUES (valor_inicial);
+        SET valor_inicial = valor_inicial - 1;
+
+    UNTIL valor_inicial = 0
+    END REPEAT repeat1 ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_numeros(6);
+SELECT * FROM ejercicios;
+
+/*
+09. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_numeros;
+DELIMITER $$
+CREATE PROCEDURE calcular_numeros(IN valor_inicial INT UNSIGNED)
+BEGIN
+
+    DELETE FROM ejercicios;
+
+    loop1:LOOP
+
+        INSERT INTO ejercicios VALUES (valor_inicial);
+        SET valor_inicial = valor_inicial - 1;
+        IF valor_inicial = 0 THEN
+
+            LEAVE loop1;
+        END if ;
+    END loop loop1 ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_numeros(6);
+SELECT * FROM ejercicios;
+
+/*
+ 10. Crea una base de datos llamada procedimientos que contenga una tabla llamada
+ pares y otra tabla llamada impares. Las dos tablas deben tener única columna llamada
+ número y el tipo de dato de esta columna debe ser INT UNSIGNED.
+ */
+
+DROP TABLE IF EXISTS pares;
+
+CREATE TABLE pares(
+    numero INT UNSIGNED
+);
+
+CREATE TABLE impares(
+    numero INT UNSIGNED
+);
+
+/*
+ Una vez creada la base de datos y las tablas deberá crear un procedimiento llamado
+ calcular_pares_impares con las siguientes características. El procedimiento recibe
+ un parámetro de entrada llamado tope de tipo INT UNSIGNED y deberá almacenar en la
+ tabla pares aquellos números pares que existan entre el número 1 el valor introducido
+ como parámetro. Habrá que realizar la misma operación para almacenar los números impares
+ en la tabla impares.
+
+ Tenga en cuenta que el procedimiento deberá eliminar el contenido actual de las tablas
+ antes de insertar los nuevos valores.
+
+ Utilice un bucle WHILE para resolver el procedimiento.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_pares_impares;
+DELIMITER $$
+CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+BEGIN
+
+    DELETE FROM impares;
+    DELETE FROM pares;
+
+    while1:WHILE tope > 1 DO
+
+        IF tope % 2 = 0 THEN
+
+            INSERT INTO pares VALUES (tope);
+        ELSE
+
+            INSERT INTO impares VALUES (tope);
+        END IF ;
+
+        SET tope = tope - 1;
+    END WHILE ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_pares_impares(5);
+SELECT p.numero AS pares, i.numero AS impares FROM pares p, impares i;
+
+/*
+ 11. Utilice un bucle REPEAT para resolver el procedimiento del ejercicio anterior.
+*/
+
+DROP PROCEDURE IF EXISTS calcular_pares_impares;
+DELIMITER $$
+CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+BEGIN
+
+    DELETE FROM impares;
+    DELETE FROM pares;
+
+    repat1:REPEAT
+
+        IF tope % 2 = 0 THEN
+
+            INSERT INTO pares VALUES (tope);
+        ELSE
+
+            INSERT INTO impares VALUES (tope);
+        END IF ;
+
+        SET tope = tope - 1;
+    UNTIL tope = 0 END REPEAT ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_pares_impares(5);
+SELECT p.numero AS pares, i.numero AS impares FROM pares p, impares i;
+
+/*
+ 12. Utilice un bucle LOOP para resolver el procedimiento del ejercicio anterior.
+ */
+
+DROP PROCEDURE IF EXISTS calcular_pares_impares;
+DELIMITER $$
+CREATE PROCEDURE calcular_pares_impares(IN tope INT UNSIGNED)
+BEGIN
+
+    DELETE FROM impares;
+    DELETE FROM pares;
+
+    loop1: LOOP
+
+        IF tope % 2 = 0 THEN
+
+            INSERT INTO pares VALUES (tope);
+        ELSE
+
+            INSERT INTO impares VALUES (tope);
+        END IF ;
+
+        SET tope = tope - 1;
+        IF tope = 0 THEN
+            LEAVE loop1;
+        END IF ;
+    END LOOP loop1 ;
+
+END $$
+DELIMITER ;
+
+CALL calcular_pares_impares(5);
+SELECT p.numero AS pares, i.numero AS impares FROM pares p, impares i;
+
+
+/*
+ 1.8.3 Funciones sin sentencias SQL
+ */
+
+ /*
+  01. Escribe una función que reciba un número entero de entrada y devuelva TRUE si el
+  número es par o FALSE en caso contrario.
+  */
+
+DROP FUNCTION IF EXISTS ISPAR;
+DELIMITER $$
+CREATE FUNCTION ISPAR(n INT UNSIGNED)
+RETURNS boolean
+BEGIN
+    RETURN !(n % 2);
+END $$
+DELIMITER ;
+
+SELECT ISPAR(5);
+SELECT ISPAR(4);
+
+/*
+ 02. Escribe una función que devuelva el valor de la hipotenusa de un triángulo a partir
+ de los valores de sus lados.
+ */
+
+DROP FUNCTION IF EXISTS HYPOTENUSA;
+DELIMITER $$
+CREATE FUNCTION HYPOTENUSA(l1 DECIMAL UNSIGNED, l2 DECIMAL UNSIGNED)
+RETURNS DECIMAL
+BEGIN
+    RETURN SQRT(l1 * l1 + l2 * l2);
+END $$
+DELIMITER ;
+
+SELECT HYPOTENUSA(5, 6);
+
+/*
+ 03. Escribe una función que reciba como parámetro de entrada un valor numérico que represente
+ un día de la semana y que devuelva una cadena de caracteres con el nombre del día de la semana
+ correspondiente. Por ejemplo, para el valor de entrada 1 debería devolver la cadena lunes.
+ */
+
+DROP FUNCTION IF EXISTS DAYTOSTRING;
+DELIMITER $$
+CREATE FUNCTION DAYTOSTRING(n INT UNSIGNED)
+RETURNS VARCHAR(15)
+BEGIN
+    CASE n
+        WHEN 1 THEN RETURN 'Lunes';
+        WHEN 2 THEN RETURN 'Martes';
+        WHEN 3 THEN RETURN 'Miercoles';
+        WHEN 4 THEN RETURN 'Jueves';
+        WHEN 5 THEN RETURN 'Viernes';
+        WHEN 6 THEN RETURN 'Sabado';
+        WHEN 7 THEN RETURN 'Domingo';
+    END CASE;
+END $$
+DELIMITER ;
+
+SELECT DAYTOSTRING(2);
+
+/*
+ 04. Escribe una función que reciba tres números reales como parámetros de entrada y
+ devuelva el mayor de los tres.
+ */
+
+DROP FUNCTION IF EXISTS MAXNUMBER;
+DELIMITER $$
+CREATE FUNCTION MAXNUMBER(n1 DECIMAL, n2 DECIMAL, n3 DECIMAL)
+RETURNS DECIMAL
+BEGIN
+    IF n1 > n2 AND n1 > n3 THEN
+
+        RETURN n1;
+    ELSE IF n2 > n3 THEN
+
+        RETURN n2;
+    ELSE RETURN n3;
+    END IF ;
+    END IF ;
+
+END $$
+DELIMITER ;
+
+SELECT MAXNUMBER(-98, 80, 19);
+
+/*
+ 05. Escribe una función que devuelva el valor del área de un círculo a partir del
+ valor del radio que se recibirá como parámetro de entrada.
+ */
+
+DROP FUNCTION IF EXISTS CIRCLEAREA;
+DELIMITER $$
+CREATE FUNCTION CIRCLEAREA(r DECIMAL UNSIGNED)
+RETURNS DECIMAL
+BEGIN
+    RETURN (r * r) * PI();
+END $$
+DELIMITER ;
+
+SELECT CIRCLEAREA(2);
+
+/*
+ 06. Escribe una función que devuelva como salida el número de años que han transcurrido
+ entre dos fechas que se reciben como parámetros de entrada. Por ejemplo, si pasamos como
+ parámetros de entrada las fechas 2018-01-01 y 2008-01-01 la función tiene que devolver que han pasado 10 años.
+ */
+
+DROP FUNCTION IF EXISTS DATEDIFF2;
+DELIMITER $$
+CREATE FUNCTION DATEDIFF2(date1 DATE, date2 DATE)
+RETURNS DATE
+BEGIN
+   RETURN DATEDIFF(date1, date2);
+END $$
+DELIMITER ;
+
+SELECT DATEFIFF(STR_TO_DATE('2018-01-01', '%Y-%m-%d'), STR_TO_DATE('2008-01-01', '%Y-%m-%d'));
+
+/*
+ 07. Escribe una función que reciba una cadena de entrada y devuelva la misma cadena
+ pero sin acentos. La función tendrá que reemplazar todas las vocales que tengan acento
+ por la misma vocal pero sin acento. Por ejemplo, si la función recibe como parámetro de
+ entrada la cadena María la función debe devolver la cadena Maria.
+ */
+
+DROP FUNCTION IF EXISTS NORMALIZE;
+DELIMITER $$
+CREATE FUNCTION NORMALIZE(str TEXT)
+RETURNS TEXT
+BEGIN
+
+    SET str = REPLACE(str,'Š','S');
+    SET str = REPLACE(str,'š','s');
+    SET str = REPLACE(str,'Ð','Dj');
+    SET str = REPLACE(str,'Ž','Z');
+    SET str = REPLACE(str,'ž','z');
+    SET str = REPLACE(str,'À','A');
+    SET str = REPLACE(str,'Á','A');
+    SET str = REPLACE(str,'Â','A');
+    SET str = REPLACE(str,'Ã','A');
+    SET str = REPLACE(str,'Ä','A');
+    SET str = REPLACE(str,'Å','A');
+    SET str = REPLACE(str,'Æ','A');
+    SET str = REPLACE(str,'Ç','C');
+    SET str = REPLACE(str,'È','E');
+    SET str = REPLACE(str,'É','E');
+    SET str = REPLACE(str,'Ê','E');
+    SET str = REPLACE(str,'Ë','E');
+    SET str = REPLACE(str,'Ì','I');
+    SET str = REPLACE(str,'Í','I');
+    SET str = REPLACE(str,'Î','I');
+    SET str = REPLACE(str,'Ï','I');
+    SET str = REPLACE(str,'Ñ','N');
+    SET str = REPLACE(str,'Ò','O');
+    SET str = REPLACE(str,'Ó','O');
+    SET str = REPLACE(str,'Ô','O');
+    SET str = REPLACE(str,'Õ','O');
+    SET str = REPLACE(str,'Ö','O');
+    SET str = REPLACE(str,'Ø','O');
+    SET str = REPLACE(str,'Ù','U');
+    SET str = REPLACE(str,'Ú','U');
+    SET str = REPLACE(str,'Û','U');
+    SET str = REPLACE(str,'Ü','U');
+    SET str = REPLACE(str,'Ý','Y');
+    SET str = REPLACE(str,'Þ','B');
+    SET str = REPLACE(str,'ß','Ss');
+    SET str = REPLACE(str,'à','a');
+    SET str = REPLACE(str,'á','a');
+    SET str = REPLACE(str,'â','a');
+    SET str = REPLACE(str,'ã','a');
+    SET str = REPLACE(str,'ä','a');
+    SET str = REPLACE(str,'å','a');
+    SET str = REPLACE(str,'æ','a');
+    SET str = REPLACE(str,'ç','c');
+    SET str = REPLACE(str,'è','e');
+    SET str = REPLACE(str,'é','e');
+    SET str = REPLACE(str,'ê','e');
+    SET str = REPLACE(str,'ë','e');
+    SET str = REPLACE(str,'ì','i');
+    SET str = REPLACE(str,'í','i');
+    SET str = REPLACE(str,'î','i');
+    SET str = REPLACE(str,'ï','i');
+    SET str = REPLACE(str,'ð','o');
+    SET str = REPLACE(str,'ñ','n');
+    SET str = REPLACE(str,'ò','o');
+    SET str = REPLACE(str,'ó','o');
+    SET str = REPLACE(str,'ô','o');
+    SET str = REPLACE(str,'õ','o');
+    SET str = REPLACE(str,'ö','o');
+    SET str = REPLACE(str,'ø','o');
+    SET str = REPLACE(str,'ù','u');
+    SET str = REPLACE(str,'ú','u');
+    SET str = REPLACE(str,'û','u');
+    SET str = REPLACE(str,'ý','y');
+    SET str = REPLACE(str,'ý','y');
+    SET str = REPLACE(str,'þ','b');
+    SET str = REPLACE(str,'ÿ','y');
+    SET str = REPLACE(str,'ƒ','f');
+
+    RETURN str;
+END $$
+DELIMITER ;
+
+SELECT NORMALIZE('Holá');
+
+/*
+ 1.8.4 Funciones con sentencias SQL
+ */
+
+/*
+  01. Escribe una función para la base de datos tienda que devuelva el número total
+  de productos que hay en la tabla productos.
+*/
+USE tienda;
+DROP FUNCTION IF EXISTS COUNTPRODUCTS;
+DELIMITER $$
+CREATE FUNCTION COUNTPRODUCTS()
+RETURNS INT UNSIGNED
+BEGIN
+    RETURN (SELECT COUNT(p.codigo) FROM producto p);
+END $$
+DELIMITER ;
+
+SELECT COUNTPRODUCTS();
+
+/*
+ 02. Escribe una función para la base de datos tienda que devuelva el valor medio del
+ precio de los productos de un determinado fabricante que se recibirá como parámetro de
+ entrada. El parámetro de entrada será el nombre del fabricante.
+ */
+
+DROP FUNCTION IF EXISTS GET_AVG_PRICE_PRODUCTS_BY_SELLER;
+DELIMITER $$
+CREATE FUNCTION GET_AVG_PRICE_PRODUCTS_BY_SELLER(seller TEXT)
+RETURNS DECIMAL UNSIGNED
+BEGIN
+
+    RETURN (SELECT AVG(p.precio)
+    FROM producto p INNER JOIN fabricante f
+        on p.codigo_fabricante = f.codigo
+    WHERE f.nombre = seller);
+
+END $$
+DELIMITER ;
+
+SELECT GET_AVG_PRICE_PRODUCTS_BY_SELLER('Asus');
+
+/*
+ 03. Escribe una función para la base de datos tienda que devuelva el valor máximo del precio
+ de los productos de un determinado fabricante que se recibirá como parámetro de entrada.
+ El parámetro de entrada será el nombre del fabricante.
+ */
+
+DROP FUNCTION IF EXISTS GET_MAX_PRICE_PRODUCT_BY_SELLER;
+DELIMITER $$
+CREATE FUNCTION GET_MAX_PRICE_PRODUCT_BY_SELLER(seller TEXT)
+RETURNS DECIMAL UNSIGNED
+BEGIN
+
+    RETURN (SELECT MAX(p.precio)
+    FROM producto p INNER JOIN fabricante f
+        on p.codigo_fabricante = f.codigo
+    WHERE f.nombre = seller);
+
+END $$
+DELIMITER ;
+
+SELECT GET_MAX_PRICE_PRODUCT_BY_SELLER('Asus');
+
+/*
+ 04. Escribe una función para la base de datos tienda que devuelva el valor mínimo del precio
+ de los productos de un determinado fabricante que se recibirá como parámetro de entrada.
+ El parámetro de entrada será el nombre del fabricante.
+ */
+
+DROP FUNCTION IF EXISTS GET_LOWER_PRICE_PRODUCT_BY_SELLER;
+DELIMITER $$
+CREATE FUNCTION GET_LOWER_PRICE_PRODUCT_BY_SELLER(seller TEXT)
+RETURNS DECIMAL UNSIGNED
+BEGIN
+
+    RETURN (SELECT MIN(p.precio)
+    FROM producto p INNER JOIN fabricante f
+        on p.codigo_fabricante = f.codigo
+    WHERE f.nombre = seller);
+
+END $$
+DELIMITER ;
+
+SELECT GET_LOWER_PRICE_PRODUCT_BY_SELLER('Asus');
+
+/*
+ 1.8.5 Manejo de errores en MySQL
+ */
+
+/*
+ 01. Crea una base de datos llamada test que contenga una tabla llamada alumno.
+ La tabla debe tener cuatro columnas:
+  id: entero sin signo (clave primaria).
+  nombre: cadena de 50 caracteres.
+  apellido1: cadena de 50 caracteres.
+  apellido2: cadena de 50 caracteres.
+ */
+
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
+
+CREATE TABLE alumno (
+    id INT UNSIGNED PRIMARY KEY,
+    nombre VARCHAR(50),
+    apellido1 VARCHAR(50),
+    apellido2 VARCHAR(50)
+);
