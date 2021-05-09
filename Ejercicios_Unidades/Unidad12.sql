@@ -691,13 +691,19 @@ SELECT CIRCLEAREA(2);
 DROP FUNCTION IF EXISTS DATEDIFF2;
 DELIMITER $$
 CREATE FUNCTION DATEDIFF2(date1 DATE, date2 DATE)
-RETURNS DATE
+RETURNS INT
 BEGIN
-   RETURN DATEDIFF(date1, date2);
+    IF date1 > date2 THEN
+
+        RETURN TIMESTAMPDIFF(YEAR, date2, date1);
+    ELSE
+        RETURN TIMESTAMPDIFF(YEAR, date1, date2);
+    END if ;
+
 END $$
 DELIMITER ;
 
-SELECT DATEFIFF(STR_TO_DATE('2018-01-01', '%Y-%m-%d'), STR_TO_DATE('2008-01-01', '%Y-%m-%d'));
+SELECT DATEDIFF2(STR_TO_DATE('2018-01-01', '%Y-%m-%d'), STR_TO_DATE('2008-01-01', '%Y-%m-%d'));
 
 /*
  07. Escribe una función que reciba una cadena de entrada y devuelva la misma cadena
@@ -890,8 +896,363 @@ CREATE DATABASE test;
 USE test;
 
 CREATE TABLE alumno (
-    id INT UNSIGNED PRIMARY KEY,
+    id INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
     nombre VARCHAR(50),
     apellido1 VARCHAR(50),
     apellido2 VARCHAR(50)
 );
+
+/*
+ Una vez creada la base de datos y la tabla deberá crear un procedimiento llamado
+ insertar_alumno con las siguientes características. El procedimiento recibe cuatro
+ parámetros de entrada (id, nombre, apellido1, apellido2) y los insertará en la tabla alumno.
+ El procedimiento devolverá como salida un parámetro llamado error que tendrá un valor
+ igual a 0 si la operación se ha podido realizar con éxito y un valor igual a 1 en caso contrario.
+ */
+
+DROP PROCEDURE IF EXISTS insertar_alumno;
+DELIMITER $$
+CREATE PROCEDURE insertar_alumno(IN id INT UNSIGNED, IN nombre TEXT, IN apellido1 TEXT, IN apellido2 TEXT, OUT error BOOLEAN)
+BEGIN
+
+    DECLARE EXIT HANDLER FOR 1062 /*SQLSTATE '23000'*/
+        BEGIN
+            SET error = TRUE;
+        END ;
+
+    SET error = FALSE;
+    INSERT INTO alumno VALUES (id, nombre, apellido1, apellido2);
+
+END $$
+DELIMITER ;
+
+CALL insertar_alumno(2, 'hola', 'hola1', 'hola2', @error);
+SELECT @error;
+
+INSERT INTO alumno VALUES (1, 'hola', 'hola1', 'hola2');
+
+/*
+  1.8.6 Transacciones con procedimientos almacenados
+ */
+
+/*
+ Crea una base de datos llamada cine que contenga dos tablas con las siguientes columnas.
+
+  Tabla cuentas:
+
+  id_cuenta: entero sin signo (clave primaria).
+  saldo: real sin signo.
+
+  Tabla entradas:
+
+  id_butaca: entero sin signo (clave primaria).
+  nif: cadena de 9 caracteres.
+ */
+
+DROP DATABASE IF EXISTS cine;
+CREATE DATABASE cine;
+USE cine;
+
+CREATE TABLE cuentas (
+    id_cuenta INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    saldo REAL UNSIGNED
+);
+
+CREATE TABLE entradas(
+    id_butaca INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    nif VARCHAR(9)
+);
+
+INSERT INTO cuentas VALUES (1, 50);
+
+/*
+ Una vez creada la base de datos y las tablas deberá crear un procedimiento llamado comprar_entrada
+ con las siguientes características. El procedimiento recibe 3 parámetros de entrada
+ (nif, id_cuenta, id_butaca) y devolverá como salida un parámetro llamado error que tendrá un
+ valor igual a 0 si la compra de la entrada se ha podido realizar con éxito y un valor igual a 1 en caso contrario.
+
+
+ El procedimiento de compra realiza los siguientes pasos:
+
+  Inicia una transacción.
+  Actualiza la columna saldo de la tabla cuentas cobrando 5 euros a la cuenta con el id_cuenta adecuado.
+  Inserta una una fila en la tabla entradas indicando la butaca (id_butaca) que acaba de comprar el usuario (nif).
+  Comprueba si ha ocurrido algún error en las operaciones anteriores. Si no ocurre ningún error entonces aplica
+   un COMMIT a la transacción y si ha ocurrido algún error aplica un ROLLBACK.
+
+ Deberá manejar los siguientes errores que puedan ocurrir durante el proceso.
+
+  ERROR 1264 (Out of range value)
+  ERROR 1062 (Duplicate entry for PRIMARY KEY)
+ */
+
+DROP PROCEDURE IF EXISTS comprar_entrada;
+DELIMITER $$
+CREATE PROCEDURE comprar_entrada(IN _nif VARCHAR(9), IN _id_cuenta INT UNSIGNED, IN _id_butaca INT UNSIGNED, OUT error BOOLEAN)
+BEGIN
+
+    DECLARE EXIT HANDLER FOR 1264, 1062
+        BEGIN
+            SET error = TRUE;
+            ROLLBACK;
+        END ;
+
+    SET error = FALSE;
+
+    START TRANSACTION;
+        UPDATE cuentas SET saldo = saldo - 5 WHERE id_cuenta = _id_cuenta;
+        INSERT INTO entradas VALUES (_id_butaca, _nif);
+    COMMIT;
+END $$
+DELIMITER ;
+
+CALL comprar_entrada('22222222T', 1, 56, @error);
+SELECT @error;
+
+/*
+ 02. ¿Qué ocurre cuando intentamos comprar una entrada y le pasamos como parámetro un número
+ de cuenta que no existe en la tabla cuentas? ¿Ocurre algún error o podemos comprar la entrada?
+
+ En caso de que exista algún error, ¿cómo podríamos resolverlo?.
+
+ Se debe implementar un metodo para verufucar las columnas afectadas en el update para ver su existe un usuario
+ con ROW_COUNT() podemos ver las columnas afectadas y verificarlo
+
+ ERROR: Hay un bug en Mariadb que el ROW_COUNT() devuelve 0 siempre.
+ */
+
+ /*
+  1.8.7 Cursores
+  */
+
+/*
+ Escribe las sentencias SQL necesarias para crear una base de datos llamada test,
+ una tabla llamada alumnos y 4 sentencias de inserción para inicializar la tabla.
+ La tabla alumnos está formada por las siguientes columnas:
+
+  id (entero sin signo y clave primaria)
+  nombre (cadena de caracteres)
+  apellido1 (cadena de caracteres)
+  apellido2 (cadena de caracteres
+  fecha_nacimiento (fecha)
+ */
+
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
+
+CREATE TABLE alumnos(
+    id INT UNSIGNED PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    nombre VARCHAR(20),
+    apellido1 VARCHAR(20),
+    apellido2 VARCHAR(20),
+    fecha_nacimiento DATE
+);
+
+INSERT INTO alumnos VALUES (1, 'Alberto', 'aaa', 'eeeeee', '1985-5-3');
+INSERT INTO alumnos VALUES (2, 'Juan', 'iii', 'oooooo', '2000-4-25');
+INSERT INTO alumnos VALUES (3, 'Pedro', 'ppp', 'kkkkkk', '1963-9-14');
+INSERT INTO alumnos VALUES (4, 'Rodrigo', 'ttt', 'jjjjjj', '1992-1-30');
+
+/*
+ Una vez creada la tabla se decide añadir una nueva columna a la tabla llamada edad que
+ será un valor calculado a partir de la columna fecha_nacimiento. Escriba la sentencia
+ SQL necesaria para modificar la tabla y añadir la nueva columna.
+ */
+
+ALTER TABLE alumnos
+    add edad INT UNSIGNED;
+
+/*
+ Escriba una función llamada calcular_edad que reciba una fecha y devuelva el número
+ de años que han pasado desde la fecha actual hasta la fecha pasada como parámetro:
+
+ Función: calcular_edad
+ Entrada: Fecha
+ Salida: Número de años (entero)
+ */
+
+DROP FUNCTION IF EXISTS calcular_edad;
+DELIMITER $$
+CREATE FUNCTION calcular_edad(fecha_nacimiento DATE)
+RETURNS INT UNSIGNED
+BEGIN
+
+    RETURN TIMESTAMPDIFF(YEAR, fecha_nacimiento, CURDATE());
+END $$
+DELIMITER ;
+
+SELECT calcular_edad((SELECT a.fecha_nacimiento FROM alumnos a WHERE id = 1));
+
+/*
+ Ahora escriba un procedimiento que permita calcular la edad de todos los alumnmos que ya
+ existen en la tabla. Para esto será necesario crear un procedimiento llamado actualizar_columna_edad
+ que calcule la edad de cada alumno y actualice la tabla. Este procedimiento hará uso de la función
+ calcular_edad que hemos creado en el paso anterior.
+ */
+
+DROP PROCEDURE IF EXISTS actualizar_columna_edad;
+DELIMITER $$
+CREATE PROCEDURE actualizar_columna_edad()
+BEGIN
+
+    DECLARE _id INT UNSIGNED;
+    DECLARE _fecha_nacimiento DATE;
+    DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE alumnos CURSOR FOR SELECT a.id, a.fecha_nacimiento FROM alumnos a;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000'
+        BEGIN
+            SET done = TRUE;
+        END ;
+    OPEN alumnos;
+
+    loop1:LOOP
+
+        FETCH alumnos INTO _id, _fecha_nacimiento;
+
+        IF done THEN
+
+            LEAVE loop1;
+        END if ;
+
+        UPDATE alumnos SET edad = calcular_edad(_fecha_nacimiento) WHERE id = _id;
+
+    END loop loop1;
+
+    CLOSE alumnos;
+END $$
+DELIMITER ;
+
+CALL actualizar_columna_edad();
+SELECT a.id, a.edad FROM alumnos a;
+
+/*
+ 02. Modifica la tabla alumnos del ejercicio anterior para añadir una nueva columna email.
+ Una vez que hemos modificado la tabla necesitamos asignarle una dirección de correo electrónico
+ de forma automática.
+ */
+
+ALTER TABLE alumnos
+    add email VARCHAR(100);
+
+/*
+ Escriba un procedimiento llamado crear_email que dados los parámetros de entrada: nombre, apellido1, apellido2 y dominio, cree una dirección de email y la devuelva como salida.
+
+Procedimiento: crear_email
+
+Entrada:
+nombre (cadena de caracteres)
+apellido1 (cadena de caracteres)
+apellido2 (cadena de caracteres)
+dominio (cadena de caracteres)
+
+Salida:
+email (cadena de caracteres)
+devuelva una dirección de correo electrónico con el siguiente formato:
+
+El primer carácter del parámetro nombre.
+Los tres primeros caracteres del parámetro apellido1.
+Los tres primeros caracteres del parámetro apellido2.
+El carácter @.
+El dominio pasado como parámetro.
+ */
+
+DROP PROCEDURE IF EXISTS crear_email;
+DELIMITER $$
+CREATE PROCEDURE crear_email(IN _nombre VARCHAR(20), IN _apellido1 VARCHAR(20), IN _apellido2 VARCHAR(20), IN _dominio VARCHAR(50), OUT email VARCHAR(100))
+BEGIN
+
+    SET email = LOWER(CONCAT(LEFT(_nombre, 1), LEFT(_apellido1, 3), LEFT(_apellido2, 3), '@', _dominio));
+END $$
+DELIMITER ;
+
+SELECT LOWER(LEFT(a.nombre, 1)) FROM alumnos a;
+
+/*
+ Ahora escriba un procedimiento que permita crear un email para todos los alumnmos que ya existen
+ en la tabla. Para esto será necesario crear un procedimiento llamado actualizar_columna_email que
+ actualice la columna email de la tabla alumnos. Este procedimiento hará uso del procedimiento
+ crear_email que hemos creado en el paso anterior.
+ */
+
+DROP PROCEDURE IF EXISTS actualizar_columna_email;
+DELIMITER $$
+CREATE PROCEDURE actualizar_columna_email()
+BEGIN
+
+    DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE _id INT UNSIGNED;
+    DECLARE _nombre VARCHAR(20);
+    DECLARE _apellido1 VARCHAR(20);
+    DECLARE _apellido2 VARCHAR(20);
+    DECLARE alumnos CURSOR FOR SELECT a.id, a.nombre, a.apellido1, a.apellido2 FROM alumnos a;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000'
+        BEGIN
+            SET done = TRUE;
+        END ;
+    OPEN alumnos;
+
+    loop1:LOOP
+
+        FETCH alumnos INTO _id, _nombre, _apellido1, _apellido2;
+
+        IF done THEN
+
+            LEAVE loop1;
+        END IF ;
+
+        CALL crear_email(_nombre, _apellido1, _apellido2, 'salesianos.edu', @email);
+        UPDATE alumnos SET email = @email WHERE id = _id;
+    END LOOP ;
+END $$
+DELIMITER ;
+
+CALL actualizar_columna_email;
+
+SELECT * FROM alumnos;
+
+/*
+ 03. Escribe un procedimiento llamado crear_lista_emails_alumnos que devuelva la lista de emails
+ de la tabla alumnos separados por un punto y coma.
+ Ejemplo: juan@iescelia.org;maria@iescelia.org;pepe@iescelia.org;lucia@iescelia.org.
+ */
+
+DROP PROCEDURE IF EXISTS crear_lista_emails_alumnos;
+DELIMITER $$
+CREATE PROCEDURE crear_lista_emails_alumnos(OUT emails TEXT)
+BEGIN
+
+    DECLARE email VARCHAR(100);
+    DECLARE done BOOLEAN DEFAULT FALSE;
+    DECLARE alumnos CURSOR FOR SELECT a.email FROM alumnos a;
+    DECLARE CONTINUE HANDLER FOR SQLSTATE '02000'
+        BEGIN
+            SET done = TRUE;
+        END ;
+
+    OPEN alumnos;
+
+    loop1: LOOP
+
+        FETCH alumnos INTO email;
+
+        IF done THEN
+
+            LEAVE loop1;
+        END IF ;
+
+        SET emails = CONCAT_WS(';', emails, email);
+    END LOOP loop1 ;
+
+    SELECT emails;
+
+END $$
+DELIMITER ;
+
+
+CALL crear_lista_emails_alumnos(@emails);
+SELECT @emails;
+
+/*
+ 1.8.8 Triggers
+ */
