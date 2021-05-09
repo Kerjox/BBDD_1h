@@ -1256,3 +1256,232 @@ SELECT @emails;
 /*
  1.8.8 Triggers
  */
+
+/*
+ Crea una base de datos llamada test que contenga una tabla llamada alumnos con las siguientes columnas.
+
+Tabla alumnos:
+
+  id (entero sin signo)
+  nombre (cadena de caracteres)
+  apellido1 (cadena de caracteres)
+  apellido2 (cadena de caracteres)
+  nota (número real)
+ */
+
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
+
+CREATE TABLE alumnos(
+    id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+    nombre VARCHAR(20),
+    apellido1 VARCHAR(20),
+    apellido2 VARCHAR(20),
+    nota REAL
+);
+
+/*
+ Una vez creada la tabla escriba dos triggers con las siguientes características:
+
+Trigger 1: trigger_check_nota_before_insert
+  Se ejecuta sobre la tabla alumnos.
+  Se ejecuta antes de una operación de inserción.
+  Si el nuevo valor de la nota que se quiere insertar es negativo, se guarda como 0.
+  Si el nuevo valor de la nota que se quiere insertar es mayor que 10, se guarda como 10.
+
+Trigger2 : trigger_check_nota_before_update
+  Se ejecuta sobre la tabla alumnos.
+  Se ejecuta antes de una operación de actualización.
+  Si el nuevo valor de la nota que se quiere actualizar es negativo, se guarda como 0.
+  Si el nuevo valor de la nota que se quiere actualizar es mayor que 10, se guarda como 10.
+ */
+
+DROP TRIGGER IF EXISTS trigger_check_nota_before_insert;
+DELIMITER $$
+CREATE TRIGGER trigger_check_nota_before_insert
+    BEFORE INSERT
+    ON alumnos FOR EACH ROW
+    BEGIN
+
+        IF NEW.nota < 0 THEN
+
+            SET NEW.nota = 0;
+        ELSEIF NEW.nota > 10 THEN
+
+            SET NEW.nota = 10;
+        END IF ;
+
+    END $$
+
+DELIMITER ;
+
+INSERT INTO alumnos VALUES (1, 'Pepe', 'López', 'López', -1);
+INSERT INTO alumnos VALUES (2, 'María', 'Sánchez', 'Sánchez', 11);
+INSERT INTO alumnos VALUES (3, 'Juan', 'Pérez', 'Pérez', 8.5);
+
+SELECT * FROM alumnos;
+
+DROP TRIGGER IF EXISTS trigger_check_nota_before_update;
+DELIMITER $$
+CREATE TRIGGER trigger_check_nota_before_update
+    BEFORE UPDATE
+    ON alumnos FOR EACH ROW
+    BEGIN
+
+        IF NEW.nota < 0 THEN
+
+            SET NEW.nota = 0;
+        ELSEIF NEW.nota > 10 THEN
+
+            SET NEW.nota = 10;
+        END IF ;
+
+    END $$
+DELIMITER ;
+
+UPDATE alumnos SET nota = -4 WHERE id = 1;
+UPDATE alumnos SET nota = 14 WHERE id = 2;
+UPDATE alumnos SET nota = 9.5 WHERE id = 3;
+
+SELECT * FROM alumnos;
+
+
+/*
+ 02. Crea una base de datos llamada test que contenga una tabla llamada alumnos con las siguientes columnas.
+
+ Tabla alumnos:
+
+  id (entero sin signo)
+  nombre (cadena de caracteres)
+  apellido1 (cadena de caracteres)
+  apellido2 (cadena de caracteres)
+  email (cadena de caracteres)
+ */
+
+DROP DATABASE IF EXISTS test;
+CREATE DATABASE test;
+USE test;
+
+CREATE TABLE alumnos(
+    id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+    nombre VARCHAR(20),
+    apellido1 VARCHAR(20),
+    apellido2 VARCHAR(20),
+    email VARCHAR(100)
+);
+ /*
+ Una vez creada la tabla escriba un trigger con las siguientes características:
+
+Trigger: trigger_crear_email_before_insert
+  Se ejecuta sobre la tabla alumnos.
+  Se ejecuta antes de una operación de inserción.
+  Si el nuevo valor del email que se quiere insertar es NULL, entonces se le creará automáticamente una dirección de email y se insertará en la tabla.
+  Si el nuevo valor del email no es NULL se guardará en la tabla el valor del email.
+  Nota: Para crear la nueva dirección de email se deberá hacer uso del procedimiento crear_email.
+ */
+
+DROP TRIGGER IF EXISTS trigger_crear_email_before_insert;
+DELIMITER $$
+CREATE TRIGGER trigger_crear_email_before_insert
+    BEFORE INSERT
+    ON alumnos FOR EACH ROW
+    BEGIN
+
+        IF NEW.email IS NULL THEN
+
+            CALL crear_email(NEW.nombre, NEW.apellido1, NEW.apellido2, 'salesianos.edu', @email);
+            SET NEW.email = @email;
+        END iF ;
+    END $$
+
+DELIMITER ;
+
+/*
+ 03. Modifica el ejercicio anterior y añade un nuevo trigger que las siguientes características:
+Trigger: trigger_guardar_email_after_update:
+
+  Se ejecuta sobre la tabla alumnos.
+  Se ejecuta después de una operación de actualización.
+  Cada vez que un alumno modifique su dirección de email se deberá insertar un nuevo registro en una tabla llamada log_cambios_email.
+  La tabla log_cambios_email contiene los siguientes campos:
+
+  id: clave primaria (entero autonumérico)
+  id_alumno: id del alumno (entero)
+  fecha_hora: marca de tiempo con el instante del cambio (fecha y hora)
+  old_email: valor anterior del email (cadena de caracteres)
+  new_email: nuevo valor con el que se ha actualizado
+ */
+DROP TABLE IF EXISTS log_cambios_email;
+CREATE TABLE log_cambios_email(
+    id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+    id_alumno INT UNSIGNED,
+    fecha_hora DATETIME NOT NULL,
+    old_email VARCHAR(100),
+    new_email VARCHAR(100)
+);
+
+DROP TRIGGER IF EXISTS trigger_guardar_email_after_update;
+DELIMITER $$
+CREATE TRIGGER trigger_guardar_email_after_update
+    AFTER UPDATE
+    ON alumnos FOR EACH ROW
+    BEGIN
+
+        INSERT INTO log_cambios_email (id_alumno, fecha_hora, old_email, new_email) VALUES (NEW.id, NOW(), OLD.email, NEW.email);
+    END $$
+
+DELIMITER ;
+
+INSERT INTO alumnos (nombre, apellido1, apellido2) VALUES ('Alberto', 'ararr', 'uiyiy');
+
+UPDATE alumnos SET email = 'hola@google.es' WHERE id = 1;
+
+
+/*
+ 04. Modifica el ejercicio anterior y añade un nuevo trigger que tenga las siguientes características:
+
+ Trigger: trigger_guardar_alumnos_eliminados:
+
+  Se ejecuta sobre la tabla alumnos.
+  Se ejecuta después de una operación de borrado.
+  Cada vez que se elimine un alumno de la tabla alumnos se deberá insertar un nuevo registro en una
+   tabla llamada log_alumnos_eliminados.
+
+ La tabla log_alumnos_eliminados contiene los siguientes campos:
+
+  id: clave primaria (entero autonumérico)
+  id_alumno: id del alumno (entero)
+  fecha_hora: marca de tiempo con el instante del cambio (fecha y hora)
+  nombre: nombre del alumno eliminado (cadena de caracteres)
+  apellido1: primer apellido del alumno eliminado (cadena de caracteres)
+  apellido2: segundo apellido del alumno eliminado (cadena de caracteres)
+  email: email del alumno eliminado (cadena de caracteres)
+ */
+
+DROP TABLE IF EXISTS log_alumnos_eliminados;
+
+CREATE TABLE log_alumnos_eliminados(
+    id INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
+    id_alumno INT UNSIGNED,
+    fecha_hora DATETIME,
+    nombre VARCHAR(20),
+    apellido1 VARCHAR(20),
+    apellido2 VARCHAR(20),
+    email VARCHAR(100)
+);
+
+DROP TRIGGER IF EXISTS trigger_guardar_alumnos_eliminados;
+DELIMITER $$
+CREATE TRIGGER trigger_guardar_alumnos_eliminados
+    AFTER DELETE
+    ON alumnos FOR EACH ROW
+    BEGIN
+
+        INSERT INTO log_alumnos_eliminados (id_alumno, fecha_hora, nombre, apellido1, apellido2, email)
+        VALUES (OLD.id, NOW(), OLD.nombre, OLD.apellido1, OLD.apellido2, OLD.email);
+    END $$
+
+DELIMITER ;
+
+DELETE FROM alumnos WHERE alumnos.id = 1;
