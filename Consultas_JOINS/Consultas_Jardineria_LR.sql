@@ -61,11 +61,10 @@ WHERE c.codigo_cliente IS NULL;
  oficina donde trabajan.
  */
 
-SELECT e.nombre
-FROM empleado e LEFT JOIN cliente c on
-    e.codigo_empleado = c.codigo_empleado_rep_ventas INNER JOIN oficina o on
-        e.codigo_oficina = o.codigo_oficina
-WHERE c.codigo_cliente IS NULL;
+SELECT e.nombre FROM empleado e LEFT JOIN cliente c
+    on e.codigo_empleado = c.codigo_empleado_rep_ventas INNER JOIN oficina o
+        on e.codigo_oficina = o.codigo_oficina
+WHERE c.codigo_cliente IS NULL ;
 
 /*
  07. Devuelve un listado que muestre los empleados que no

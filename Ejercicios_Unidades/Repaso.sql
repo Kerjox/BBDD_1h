@@ -131,3 +131,29 @@ DELIMITER ;
 
 CALL calcular_pagos_pendientes(1);
 SELECT * FROM clientes_con_pagos_pendientes;
+
+
+/**Suma total alquileres cliente*/
+
+SELECT SUM(p.total) FROM cliente c INNER JOIN pago p
+    on c.id_cliente = p.id_cliente
+WHERE c.id_cliente = 1;
+
+/* Peliculas que nunca se han alquilado*/
+
+SELECT p.titulo FROM pelicula p INNER JOIN inventario i
+    on p.id_pelicula = i.id_pelicula LEFT JOIN alquiler a
+        on i.id_inventario = a.id_inventario
+WHERE a.id_inventario IS NULL ;
+
+/* Pelicuals en ningún inventario */
+
+SELECT p.titulo FROM pelicula p LEFT JOIN inventario i
+    on p.id_pelicula = i.id_pelicula
+WHERE i.id_pelicula IS NULL ;
+
+/* Empleados que sean Jefes */
+
+SELECT e.nombre FROM empleado e LEFT JOIN almacen a
+    on e.id_empleado = a.id_empleado_jefe
+WHERE a.id_empleado_jefe IS NOT NULL ;
